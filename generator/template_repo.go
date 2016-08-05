@@ -112,6 +112,13 @@ var FuncMap template.FuncMap = map[string]interface{}{
 		}
 		return false
 	},
+	"typeToSuffix": func(typeName string) string {
+		for strings.HasPrefix(typeName, "[]") {
+			typeName = typeName[2:]
+			typeName = fmt.Sprintf("%sSlice", typeName)
+		}
+		return typeName
+	},
 }
 
 // NewRepository creates a new template repository with the provided functions defined
